@@ -1,6 +1,0 @@
-- uses: jfrog/setup-jfrog-cli@v3
-    env:
-        JF_URL: https://elinaf.jfrog.io
-    with:
-        oidc-provider-name: github-oidc 
-        oidc-audience: jfrog-github
