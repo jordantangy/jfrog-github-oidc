@@ -19,6 +19,7 @@ jobs:
           JF_URL: ${{ secrets.JFROG_PLATFORM_URL }}
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
         with:
+          version: '2.52.8' # Specify a supported JFrog CLI version
           oidc-provider-name: github-oidc
           oidc-audience: jfrog-github
 
