@@ -1,25 +1,7 @@
-name: "Setup JFrog CLI"
-description: "Install and configure JFrog CLI."
-author: "JFrog"
-inputs:
-    version:
-        description: "JFrog CLI Version"
-        default: "2.54.0"
-        required: false
-    download-repository:
-        description: "Remote repository in Artifactory pointing to 'https://releases.jfrog.io/artifactory/jfrog-cli'. Use this parameter in case you don't have an Internet access."
-        required: false
-    oidc-provider-name:
-        description: "Provider Name's value that was set in OpenId Connect integration in the JFrog platform."
-        required: false
-    oidc-audience:
-        description: "By default, this is the URL of the GitHub repository owner, such as the organization that owns the repository."
-        required: false
-
-runs:
-    using: "node20"
-    main: "lib/main.js"
-    post: "lib/cleanup.js"
-branding:
-    icon: "terminal"
-    color: "green"
+- uses: jfrog/setup-jfrog-cli@v3
+  env:
+    # JFrog platform url (for example: https://acme.jfrog.io)
+    JF_URL: ${{ secrets.JFROG_PLATFORM_URL }}
+    JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+- run: |
+    jf rt ping
