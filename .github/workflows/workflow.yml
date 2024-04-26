@@ -1,8 +1,12 @@
-- uses: jfrog/setup-jfrog-cli@v3
-    env:
-        JF_URL: https://elinaf.jfrog.io
-	JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
-    with:
-        oidc-provider-name: github-oidc 
-        oidc-audience: jfrog-github
+- name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v3
+        env:
+          JF_URL: ${{ secrets.JFROG_PLATFORM_URL }}
+	  JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+        with:
+          oidc-provider-name: github-oidc
+	  oidc-audience: jfrog-github
 
+- name: Test JFrog CLI
+        run: |
+          jf rt ping
