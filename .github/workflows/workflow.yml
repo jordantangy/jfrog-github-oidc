@@ -1,12 +1,13 @@
 - name: Setup JFrog CLI
-        uses: jfrog/setup-jfrog-cli@v3
-        env:
-          JF_URL: ${{ secrets.JFROG_PLATFORM_URL }}
-	  JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
-        with:
-          oidc-provider-name: github-oidc
-	  oidc-audience: jfrog-github
+  uses: jfrog/setup-jfrog-cli@v3
+  env:
+    JF_URL: ${{ secrets.JFROG_PLATFORM_URL }}
+    JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+  with:
+    oidc-provider-name: github-oidc
+    oidc-audience: jfrog-github
 
 - name: Test JFrog CLI
-        run: |
-          jf rt ping
+  run: |
+    jf rt ping
+
