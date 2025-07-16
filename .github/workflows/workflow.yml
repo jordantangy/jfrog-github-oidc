@@ -11,8 +11,7 @@ jobs:
      runs-on: ubuntu-latest
      env:
       OIDC_AUDIENCE: 'jfrog-github'
-      OIDC_PROVIDER: 'github'
-      PLATFORM_REPO: 'eks-npm'
+      OIDC_PROVIDER: 'test'
      defaults:
       run:
         working-directory: ./package
