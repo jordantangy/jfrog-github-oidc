@@ -12,7 +12,7 @@ jobs:
      env:
       OIDC_AUDIENCE: 'jfrog-github'
       OIDC_PROVIDER: 'github'
-      PLATFORM_REPO: 'default-npm-remote'
+      PLATFORM_REPO: 'eks-npm'
      defaults:
       run:
         working-directory: ./package
@@ -24,30 +24,9 @@ jobs:
          uses: actions/setup-node@v3
    
        - name: Setup JFrog CLI
-       - uses: jfrog/setup-jfrog-cli@v4
+         uses: jfrog/setup-jfrog-cli@v3
          env:  
-            JF_URL: https://elinaf.jfrog.io 
+           JF_URL: ${{ secrets.JF_URL }}
          with:
-             oidc-provider-name: test 
-             oidc-audience: jfrog-github
-
-       - name: Set CLI Config
-         run: jf npm-config --global=true --repo-resolve=$PLATFORM_REPO --repo-deploy=$PLATFORM_REPO
-           
-       - name: Install Dependencies
-         run: jf npm install
-           
-       - name: Run tests
-         run: npm test
-         
-       - name: Publish
-         run: jf npm publish
-         
-       - name: Publish Build info With JFrog CLI
-         run: |
-          # Collect environment variables for the build
-          jf rt build-collect-env
-          # Collect VCS details from git and add them to the build
-          jf rt build-add-git
-          # Publish build info
-          jf rt build-publish
+           oidc-provider-name: ${{ env.OIDC_PROVIDER }}
+           oidc-audience: ${{ env.OIDC_AUDIENCE }}
